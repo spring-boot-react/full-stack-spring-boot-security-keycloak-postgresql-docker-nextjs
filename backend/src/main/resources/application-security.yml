@@ -1,0 +1,17 @@
+##############################
+###### SECURITY SETTINGS #####
+##############################
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://${SERVER_URI}:${KEYCLOAK_PORT}/realms/${KEYCLOAK_REALM}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+
+jwt:
+  auth:
+    converter:
+      resource-id: ${KEYCLOAK_RESOURCE_ID}
+      principal-attribute: preferred_username
