@@ -2,32 +2,205 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* base styles */
+p > a {
+  @apply
+  font-bold
+  underline
+  text-blue-500
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* header styles */
+h1 {
+  @apply 
+    font-bold
+    text-6xl
+    text-transparent
+    uppercase
+    bg-clip-text
+    bg-gradient-to-r from-purple-600 from-10% via-blue-500 via-60% to-blue-500 to-70%
+    mb-4
+}
+
+h2 {
+  @apply
+    font-bold
+    text-5xl
+    text-transparent
+    uppercase
+    bg-clip-text
+    bg-gradient-to-r from-purple-600 from-10% via-blue-500 via-60% to-blue-500 to-70%
+    mb-4
+}
+
+h3 {
+  @apply
+    font-medium
+    text-4xl
+    text-transparent
+    uppercase
+    bg-clip-text
+    bg-gradient-to-r from-purple-600 from-10% via-blue-500 via-60% to-blue-500 to-70%
+    mb-3
+}
+
+h4 {
+  @apply
+    font-medium
+    text-2xl
+    text-transparent
+    uppercase
+    bg-clip-text
+    bg-gradient-to-r from-purple-600 from-10% via-blue-500 via-60% to-blue-500 to-70%
+    mb-1
+}
+
+/* nav styles */
+nav {
+  @apply
+    pb-4
+    border-b-2 border-gray-200
+    flex items-center gap-5 
+    my-10 mx-auto 
+    max-w-5xl;
+}
+
+nav a:hover {
+  @apply text-black;
+}
+
+main nav {
+  @apply border-0;
+}
+
+/* form styles */
+form {
+  @apply 
+    py-4 px-7 
+    bg-opacity-5 
+    rounded-md 
+    block 
+    mx-auto 
+    min-w-fit w-1/4;
+}
+form label {
+  @apply block;
+}
+form input,
+form textarea,
+form select {
+  @apply 
+    block 
+    mt-2 my-4 px-2 py-1 
+    rounded-sm w-full;
+}
+form button {
+  @apply block mx-auto;
+}
+
+/* feedback styles */
+.error {
+  @apply 
+    border-2 
+    border-red-500 
+    bg-red-300
+    text-red-800 
+    py-1 px-2 
+    rounded-sm
+    block
+    max-w-fit
+    my-4 mx-auto;
+}
+
+@layer components {
+  /* header secondary styles */
+  .h1-secondary {
+    @apply
+      font-semibold
+      text-gray-500
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  .h2-secondary {
+    @apply
+      font-semibold
+      text-gray-500
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .h3-secondary {
+    @apply
+      text-gray-500
+  }
+
+  .h4-secondary {
+    @apply
+      text-gray-500
+  }
+
+  /* button styles */
+  .btn-primary {
+    @apply
+      font-medium
+      text-white
+      bg-gradient-to-br from-purple-600 to-blue-500 opacity-90
+      rounded-lg
+      border border-purple-300
+      hover:bg-gradient-to-bl hover:from-purple-600 hover:to-blue-500 hover:opacity-100
+      hover:border-transparent
+      active:bg-gradient-to-bl active:from-purple-800 active:to-blue-700 active:ring
+      active:border-purple-800
+      py-2 px-4
+  }
+
+  .btn-secondary {
+    @apply
+      font-medium
+      text-purple-700
+      bg-transparent
+      rounded-lg
+      border border-purple-600
+      hover:bg-gradient-to-br from-purple-600 to-blue-500
+      hover:text-white
+      hover:border-transparent
+      active:bg-gradient-to-bl active:from-purple-800 active:to-blue-700 active:ring
+      active:border-purple-800
+      py-2 px-4 
+  }
+
+  /* card styles */
+  .card {
+    @apply 
+      bg-white
+      max-w-xl
+      shadow-sm
+      rounded-md
+      relative
+      overflow-hidden
+      py-3 px-4 my-4
+  }
+
+  /* pill styles */
+  .pill {
+    @apply 
+      py-1 px-2 mt-3
+      inline-block 
+      text-xs font-semibold;
+  }
+  
+  .pill.high {
+    @apply bg-red-300 text-red-600;
+  }
+
+  .pill.medium {
+    @apply bg-blue-300 text-blue-600;
+  }
+
+  .pill.low {
+    @apply bg-emerald-300 text-emerald-600;
+  }
+
+  .card .pill {
+    @apply 
+      absolute bottom-0 right-0 
+      rounded-tl-md;
   }
 }
