@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class OAuth2ResourceServerSecurityConfiguration {
 
-    private final JwtAuthConverter jwtAuthConverter;
+    private final OAuth2JwtConverter oAuth2JwtConverter;
 
     private static final String USER = "client_user";
     private static final String MODERATOR = "client_moderator";
@@ -40,7 +40,7 @@ public class OAuth2ResourceServerSecurityConfiguration {
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter))
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(oAuth2JwtConverter))
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session
