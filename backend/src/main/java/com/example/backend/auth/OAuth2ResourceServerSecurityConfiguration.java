@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -30,8 +29,10 @@ public class OAuth2ResourceServerSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/admin").hasRole(ADMIN)
                         .requestMatchers("/moderator").hasRole(MODERATOR)
@@ -41,11 +42,8 @@ public class OAuth2ResourceServerSecurityConfiguration {
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(oAuth2JwtConverter))
-                )
-                .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
+                );
+        return http.build();
     }
 
     @Bean
